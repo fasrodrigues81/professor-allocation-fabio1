@@ -86,11 +86,19 @@ public class AllocationRepositoryTest {
 	@Test
 	public void save_update() throws ParseException {
 		// Arrange
+		Allocation allocation = new Allocation();
+		allocation.setId(10L);
+		allocation.setDay(DayOfWeek.WEDNESDAY);
+		allocation.setCourseId(1L);
+		allocation.setProfessorId(1L);
+		allocation.setStart(sdf.parse("12:00-0300"));
+		allocation.setEnd(sdf.parse("13:00-0300"));
 
 		// Act
+		Allocation alooc = allocationRepository.save(allocation);
 
 		// Print
-
+		System.out.println(alooc);
 	}
 
 	@Test
