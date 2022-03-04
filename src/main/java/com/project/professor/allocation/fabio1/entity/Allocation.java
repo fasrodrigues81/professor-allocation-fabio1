@@ -94,4 +94,14 @@ public class Allocation {
 		this.professorId = professorId;
 	}
 
+	@Override
+	public String toString() {
+		return "Allocation [id=" + id + ", day=" + day + ", start=" + start + ", end=" + end + ", courseId=" + courseId
+				+ ", Cour=" + Cour + ", professorId=" + professorId + ", Prof=" + Prof + ", getId()=" + getId()
+				+ ", getDay()=" + getDay() + ", getStart()=" + getStart() + ", getEnd()=" + getEnd()
+				+ ", getCourseId()=" + getCourseId() + ", getProfessorId()=" + getProfessorId() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+	
 }

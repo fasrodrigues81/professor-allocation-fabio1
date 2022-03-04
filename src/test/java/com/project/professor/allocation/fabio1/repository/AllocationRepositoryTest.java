@@ -2,6 +2,8 @@ package com.project.professor.allocation.fabio1.repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,98 +13,97 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.project.professor.allocation.fabio1.entity.Allocation;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 @TestPropertySource(locations = "classpath:application.properties")
 public class AllocationRepositoryTest {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
+	SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
 
-    @Autowired
-    AllocationRepository allocationRepository;
+	@Autowired
+	AllocationRepository allocationRepository;
 
-    @Test
-    public void findAll() {
-        // Act
-        
+	@SuppressWarnings("unused")
+	@Test
+	public void findAll() {
+		// Act
+		List<Allocation> allocations = allocationRepository.findAll();
 
-        // Print
-        
-    }
+		// Print
+		System.out.println();
+	}
 
-    @Test
-    public void findById() {
-        // Arrange
-        
+	@Test
+	public void findById() {
+		// Arrange
 
-        // Act
-        
+		// Act
 
-        // Print
-        
-    }
+		// Print
 
-    @Test
-    public void findByProfessorId() {
-        // Arrange
-        
+	}
 
-        // Act
-        
+	@Test
+	public void findByProfessorId() {
+		// Arrange
 
-        // Print
-        
-    }
+		// Act
 
-    @Test
-    public void findByCourseId() {
-        // Arrange
-        
+		// Print
 
-        // Act
-        
+	}
 
-        // Print
-        
-    }
+	@Test
+	public void findByCourseId() {
+		// Arrange
 
-    @Test
-    public void save_create() throws ParseException {
-        // Arrange
-        
+		// Act
 
-        // Act
-        
+		// Print
 
-        // Print
-        
-    }
+	}
 
-    @Test
-    public void save_update() throws ParseException {
-        // Arrange
-        
+	@Test
+	public void save_create() throws ParseException {
+		// Arrange
+		Allocation allocation = new Allocation();
+		allocation.setDay(DayOfWeek.MONDAY);
+		allocation.setCourseId(1L);
+		allocation.setProfessorId(1L);
+		allocation.setStart(sdf.parse("10:00-0300"));
+		allocation.setEnd(sdf.parse("11:00-0300"));
 
-        // Act
-        
+		// Act
+		Allocation alooc = allocationRepository.save(allocation);
 
-        // Print
-        
-    }
+		// Print
+		System.out.println(alooc);
+	}
 
-    @Test
-    public void deleteById() {
-        // Arrange
-        
+	@Test
+	public void save_update() throws ParseException {
+		// Arrange
 
-        // Act
-        
-    }
+		// Act
 
-    @Test
-    public void deleteAll() {
-        // Act
-        
-    }
+		// Print
+
+	}
+
+	@Test
+	public void deleteById() {
+		// Arrange
+
+		// Act
+
+	}
+
+	@Test
+	public void deleteAll() {
+		// Act
+
+	}
 }

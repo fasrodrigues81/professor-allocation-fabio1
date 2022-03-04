@@ -31,4 +31,12 @@ public class Course {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+
+	
 }

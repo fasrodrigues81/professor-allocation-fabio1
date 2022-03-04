@@ -60,4 +60,13 @@ public class Professor {
 		this.departmentId = departmentId;
 	}
 
+	@Override
+	public String toString() {
+		return "Professor [id=" + id + ", name=" + name + ", cpf=" + cpf + ", departmentId=" + departmentId
+				+ ", Depart=" + Depart + ", getId()=" + getId() + ", getName()=" + getName() + ", getCpf()=" + getCpf()
+				+ ", getDepartmentId()=" + getDepartmentId() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+	
 }
