@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,12 @@ public class AllocationRepositoryTest {
 		// Arrange
 
 		// Act
-
+		Optional<Allocation> optional = allocationRepository.findById(2L);
+		
 		// Print
-
+		Allocation alloc = optional.orElse(null);
+		System.out.println(alloc);
+		
 	}
 
 	@Test
