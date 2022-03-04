@@ -21,27 +21,27 @@ public class Allocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 50)
 	private DayOfWeek day;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date start;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date end;
-	
+
 	@Column(name = "course_Id", nullable = false)
 	private Long courseId;
-	
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "course_Id", updatable = false, insertable = false, nullable = false)
 	private Course Cour;
-	
+
 	@Column(name = "professor_Id", nullable = false)
 	private Long professorId;
-	
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "professor_Id", updatable = false, insertable = false, nullable = false)
 	private Professor Prof;
