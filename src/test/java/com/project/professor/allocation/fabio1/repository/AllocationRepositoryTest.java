@@ -106,12 +106,12 @@ public class AllocationRepositoryTest {
 		// Arrange
 
 		// Act
-
+		allocationRepository.deleteById(2L);
 	}
 
 	@Test
 	public void deleteAll() {
 		// Act
-
+		allocationRepository.deleteAllInBatch();
 	}
 }
