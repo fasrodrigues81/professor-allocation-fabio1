@@ -68,5 +68,4 @@ public class Professor {
 				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 }

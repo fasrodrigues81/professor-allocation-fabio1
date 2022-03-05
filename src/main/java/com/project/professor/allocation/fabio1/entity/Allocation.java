@@ -103,5 +103,4 @@ public class Allocation {
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 }

@@ -35,46 +35,36 @@ public class AllocationService {
 
 	// CRUD CREATE
 	public Allocation create(Allocation allocation) {
-		
+
 		allocation.setId(null);
 		Allocation allocationNew = allocationRepository.save(allocation);
 		return allocationNew;
 	}
-	
+
 	// CRUD UPDATE
-	public Allocation update (Allocation allocation)
-	{
+	public Allocation update(Allocation allocation) {
 		Long id = allocation.getId();
-		if (id != null && allocationRepository.existsById(id)) 
-		{
-		
+		if (id != null && allocationRepository.existsById(id)) {
+
 			Allocation allocationNew = allocationRepository.save(allocation);
 			return allocationNew;
-		}
-		else 
-		{
+		} else {
 			return null;
 		}
 
-	} 
-	
-	//CRUD DELET by ID
-	public void deleteById(Long id) 
-	{
-		if (allocationRepository.existsById(id)) 
-		{
+	}
+
+	// CRUD DELET by ID
+	public void deleteById(Long id) {
+		if (allocationRepository.existsById(id)) {
 			allocationRepository.deleteById(id);
 		}
-		
+
 	}
-	
-	//CRUD DELETE all
-	public void deleteAll() 
-	{
+
+	// CRUD DELETE all
+	public void deleteAll() {
 		allocationRepository.deleteAllInBatch();
 	}
-	
-	
-	
-	
-}	
+
+}
