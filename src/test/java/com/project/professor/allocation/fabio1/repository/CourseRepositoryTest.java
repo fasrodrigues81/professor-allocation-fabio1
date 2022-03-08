@@ -20,7 +20,7 @@ public class CourseRepositoryTest {
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
 
     @Autowired
-    AllocationRepository allocationRepository;
+    CourseRepository courseRepository;
 
     @Test
     public void findAll() {

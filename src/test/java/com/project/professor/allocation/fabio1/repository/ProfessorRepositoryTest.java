@@ -19,91 +19,78 @@ public class ProfessorRepositoryTest {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
 
-    @Autowired
-    AllocationRepository allocationRepository;
+	@Autowired
+	ProfessorRepository professorRepository;
 
-    @Test
-    public void findAll() {
-        // Act
-        
+	@Test
+	public void findAll() {
+		// Act
 
-        // Print
-        
-    }
+		// Print
 
-    @Test
-    public void findById() {
-        // Arrange
-        
+	}
 
-        // Act
-        
+	@Test
+	public void findById() {
+		// Arrange
 
-        // Print
-        
-    }
+		// Act
 
-    @Test
-    public void findByProfessorId() {
-        // Arrange
-        
+		// Print
 
-        // Act
-        
+	}
 
-        // Print
-        
-    }
+	@Test
+	public void findByProfessorId() {
+		// Arrange
 
-    @Test
-    public void findByCourseId() {
-        // Arrange
-        
+		// Act
 
-        // Act
-        
+		// Print
 
-        // Print
-        
-    }
+	}
 
-    @Test
-    public void save_create() throws ParseException {
-        // Arrange
-        
+	@Test
+	public void findByCourseId() {
+		// Arrange
 
-        // Act
-        
+		// Act
 
-        // Print
-        
-    }
+		// Print
 
-    @Test
-    public void save_update() throws ParseException {
-        // Arrange
-        
+	}
 
-        // Act
-        
+	@Test
+	public void save_create() throws ParseException {
+		// Arrange
 
-        // Print
-        
-    }
+		// Act
 
-    @Test
-    public void deleteById() {
-        // Arrange
-        
+		// Print
 
-        // Act
-        
-    }
+	}
 
-    @Test
-    public void deleteAll() {
-        // Act
-        
-    }
+	@Test
+	public void save_update() throws ParseException {
+		// Arrange
+
+		// Act
+
+		// Print
+
+	}
+
+	@Test
+	public void deleteById() {
+		// Arrange
+
+		// Act
+
+	}
+
+	@Test
+	public void deleteAll() {
+		// Act
+
+	}
 }
-
