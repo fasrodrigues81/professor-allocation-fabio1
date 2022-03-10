@@ -15,36 +15,66 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Allocation {
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(length = 50)
+	@Column(length = 50, nullable = false)
 	private DayOfWeek day;
 
+	@ApiModelProperty(example = "10:00-0300")
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date start;
 
+	@ApiModelProperty(example = "12:00-0300")
 	@Temporal(TemporalType.TIME)
 	private Date end;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "course_Id", nullable = false)
 	private Long courseId;
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "course_Id", updatable = false, insertable = false, nullable = false)
 	private Course Cour;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "professor_Id", nullable = false)
 	private Long professorId;
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "professor_Id", updatable = false, insertable = false, nullable = false)
 	private Professor Prof;
+
+	public Course getCour() {
+		return Cour;
+	}
+
+	public void setCour(Course cour) {
+		Cour = cour;
+	}
+
+	public Professor getProf() {
+		return Prof;
+	}
+
+	public void setProf(Professor prof) {
+		Prof = prof;
+	}
 
 	public Long getId() {
 		return id;
