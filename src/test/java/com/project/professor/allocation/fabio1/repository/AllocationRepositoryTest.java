@@ -34,13 +34,14 @@ public class AllocationRepositoryTest {
 		List<Allocation> allocations = allocationRepository.findAll();
 
 		// Print
-		System.out.println();
+		allocations.forEach(System.out::println);
 	}
 
 	@Test
 	public void findById() {
 		// Arrange
-
+		Long id = 1L;
+		 
 		// Act
 		Optional<Allocation> optional = allocationRepository.findById(2L);
 		
@@ -79,6 +80,8 @@ public class AllocationRepositoryTest {
 		allocation.setProfessorId(1L);
 		allocation.setStart(sdf.parse("10:00-0300"));
 		allocation.setEnd(sdf.parse("11:00-0300"));
+		allocation.setProfessorId(1L);
+        allocation.setCourseId(1L);
 
 		// Act
 		Allocation alooc = allocationRepository.save(allocation);
@@ -108,7 +111,8 @@ public class AllocationRepositoryTest {
 	@Test
 	public void deleteById() {
 		// Arrange
-
+		Long id = 1L;
+		
 		// Act
 		allocationRepository.deleteById(2L);
 	}
