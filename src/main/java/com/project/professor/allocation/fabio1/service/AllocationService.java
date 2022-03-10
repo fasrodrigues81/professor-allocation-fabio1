@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.project.professor.allocation.fabio1.entity.Allocation;
 import com.project.professor.allocation.fabio1.entity.Course;
 import com.project.professor.allocation.fabio1.entity.Professor;
-import com.project.professor.allocation.fabio1.entity.Allocation;
 import com.project.professor.allocation.fabio1.repository.AllocationRepository;
 
 @Service
@@ -65,6 +65,22 @@ public class AllocationService {
 			return null;
 		}
 	}
+	
+	private Allocation saveInternal(Allocation allocation) {
+		if (hasCollision(allocation)) {
+			throw new RuntimeException("hasCollision");
+		} else {
+			Allocation allocationNew = allocationRepository.save(allocation);
+
+			Professor professor = professorService.findById(allocationNew.getProfessorId());
+			Course course = courseService.findById(allocationNew.getCourseId());
+
+			allocationNew.setProf(professor);
+			allocationNew.setCour(course);
+
+			return allocationNew;
+		}
+	}
 
 	// CRUD DELET by ID
 	public void deleteById(Long id) {
@@ -78,5 +94,27 @@ public class AllocationService {
 	public void deleteAll() {
 		allocationRepository.deleteAllInBatch();
 	}
+		
+		// Regra de Negócio
+		boolean hasCollision(Allocation newAllocation) {
+			boolean hasCollision = false;
 
-}
+			List<Allocation> currentAllocations = allocationRepository.findByProfessorId(newAllocation.getProfessorId());
+
+			for (Allocation currentAllocation : currentAllocations) {
+				hasCollision = hasCollision(currentAllocation, newAllocation);
+				if (hasCollision) {
+					break;
+				}
+			}
+
+			return hasCollision;
+		}
+
+		private boolean hasCollision(Allocation currentAllocation, Allocation newAllocation) {
+			return !currentAllocation.getId().equals(newAllocation.getId())
+					&& currentAllocation.getDay() == newAllocation.getDay()
+					&& currentAllocation.getStart().compareTo(newAllocation.getEnd()) < 0
+					&& newAllocation.getStart().compareTo(currentAllocation.getEnd()) < 0;
+		}
+	}
