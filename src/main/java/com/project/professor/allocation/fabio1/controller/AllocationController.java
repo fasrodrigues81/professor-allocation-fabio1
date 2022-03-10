@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.professor.allocation.fabio1.entity.Allocation;
 import com.project.professor.allocation.fabio1.service.AllocationService;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class AllocationController {
@@ -28,6 +33,9 @@ public class AllocationController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/allocations", produces = MediaType.APPLICATION_JSON_VALUE)
+	//public List<Allocation> findAll()
+	// http://127.0.0.1/departments ou
+	// GET http://localhost:8080/departments
 	public ResponseEntity<List<Allocation>> findAll() {
 		List<Allocation> allocations = allocationService.findAll();
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
@@ -55,6 +63,13 @@ public class AllocationController {
 		}
 	}
 
+	@ApiOperation(value = "Update an allocation")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 404, message = "Not Found")
+	})
+
 	@ResponseStatus(HttpStatus.OK)
 	@PutMapping(path = "/allocations/{allocation_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Allocation> update(@PathVariable(name = "allocation_id") Long id,
@@ -69,8 +84,24 @@ public class AllocationController {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+	}
+		    
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(path = "/allocations/{allocation_id}")
+	public ResponseEntity<Void> deleteById(@PathVariable(name = "allocation_id") Long id) {
+		allocationService.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(path = "/allocations")
+	public ResponseEntity<Void> deleteAll() {
+		allocationService.deleteAll();
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		
 
 	}
 
