@@ -14,7 +14,7 @@ public class ProfessorService {
 	private final ProfessorRepository professorRepository;
 	private final DepartmentService departmentService;
 
-	public ProfessorService(ProfessorRepository professorRepository) {
+		public ProfessorService(ProfessorRepository professorRepository, DepartmentService departmentService) {
 		super();
 		this.professorRepository = professorRepository;
 		this.departmentService = departmentService;
