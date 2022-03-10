@@ -8,23 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Professor {
 
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+
+	@Column(name = "name", nullable = false)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(length = 11, unique = true, nullable = false)
+	@Column(name = "cpf", length = 11, unique = true, nullable = false)
 	private String cpf;
 
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(name = "department_Id", nullable = false)
 	private Long departmentId;
 
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "department_Id", updatable = false, insertable = false, nullable = false)
 	private Department Depart;
