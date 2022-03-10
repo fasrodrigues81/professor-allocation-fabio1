@@ -18,12 +18,13 @@ public class CourseService {
 	}
 
 	// CRUD READ all
-	public List<Course> findAll() {
-
-		List<Course> courses = courseRepository.findAll();
-		return courses;
+	public List<Course> findAll(String name) {
+		if (name == null) {
+			return courseRepository.findAll();
+		} else {
+			return courseRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
-
 	// CRUD READ by ID
 	public Course findById(Long id) {
 
@@ -56,7 +57,7 @@ public class CourseService {
 
 	// CRUD DELET by ID
 	public void deleteById(Long id) {
-		if (courseRepository.existsById(id)) {
+		if (id != null && courseRepository.existsById(id)) {
 			courseRepository.deleteById(id);
 		}
 
