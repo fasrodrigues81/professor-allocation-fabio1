@@ -18,10 +18,12 @@ public class DepartmentService {
 	}
 
 	// CRUD READ all
-	public List<Department> findAll() {
-
-		List<Department> courses = departmentRepository.findAll();
-		return courses;
+	public List<Department> findAll(String name) {
+		if (name == null) {
+			return departmentRepository.findAll();
+		} else {
+			return departmentRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
 
 	// CRUD READ by ID
