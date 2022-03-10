@@ -15,8 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -30,15 +35,22 @@ public class Allocation {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(length = 50, nullable = false)
+	@Column(name = "day", nullable = false)
 	private DayOfWeek day;
 
 	@ApiModelProperty(example = "10:00-0300")
-	@Column(nullable = false)
+	@JsonFormat(pattern = "HH:mmZ")
+	@JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+	@Column(name = "start", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date start;
 
 	@ApiModelProperty(example = "12:00-0300")
+	@JsonFormat(pattern = "HH:mmZ")
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+	@Column(name = "end", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date end;
 
