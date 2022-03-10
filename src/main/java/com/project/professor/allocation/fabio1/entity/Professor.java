@@ -13,6 +13,7 @@ public class Professor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private Long id;
 
 	@Column(nullable = false)
@@ -27,6 +28,14 @@ public class Professor {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "department_Id", updatable = false, insertable = false, nullable = false)
 	private Department Depart;
+
+	public Department getDepart() {
+		return Depart;
+	}
+
+	public void setDepart(Department depart) {
+		Depart = depart;
+	}
 
 	public Long getId() {
 		return id;
