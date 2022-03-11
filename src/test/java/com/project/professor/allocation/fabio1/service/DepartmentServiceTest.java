@@ -1,7 +1,6 @@
 package com.project.professor.allocation.fabio1.service;
 
 import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.List;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import com.project.professor.allocation.fabio1.entity.Allocation;
+import com.project.professor.allocation.fabio1.entity.Department;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application.properties")
@@ -20,15 +20,15 @@ public class DepartmentServiceTest {
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
 
 	@Autowired
-	AllocationService allocationService;
+	DepartmentService departmentService;
 
 	@Test
 	public void findAll() {
 		// Act
-		List<Allocation> allocations = allocationService.findAll();
+		 List<Department> departments = departmentService.findAll(null);
 
 		// Print
-		allocations.forEach(System.out::println);
+		 departments.forEach(System.out::println);
 	}
 
 	@Test
@@ -37,46 +37,50 @@ public class DepartmentServiceTest {
 		Long id = 1L;
 
 		// Act
-		Allocation allocation = allocationService.findById(id);
+		Department department = departmentService.findById(id);
 
 		// Print
-		System.out.println(allocation);
+		System.out.println(department);
 	}
+	
+	@Test
+    public void findAllByName() {
+        // Arrange
+        String name = "department";
+
+        // Act
+        List<Department> departments = departmentService.findAll(name);
+
+        // Print
+        departments.forEach(System.out::println);
+    }
 
 	@Test
 	public void save() throws ParseException {
 		// Arrange
-		Allocation allocation = new Allocation();
-		allocation.setId(null);
-		allocation.setDay(DayOfWeek.WEDNESDAY);
-		allocation.setStart(sdf.parse("19:00-0300"));
-		allocation.setEnd(sdf.parse("20:00-0300"));
-		allocation.setProfessorId(1L);
-		allocation.setCourseId(1L);
+		Department department = new Department();
+        department.setId(null);
+        department.setName("Department 1");
 
 		// Act
-		allocation = allocationService.create(allocation);
+        department = departmentService.save(department);
 
 		// Print
-		System.out.println(allocation);
+        System.out.println(department);
 	}
 
 	@Test
 	public void update() throws ParseException {
 		// Arrange
-		Allocation allocation = new Allocation();
-		allocation.setId(1L);
-		allocation.setDay(DayOfWeek.MONDAY);
-		allocation.setStart(sdf.parse("19:00-0300"));
-		allocation.setEnd(sdf.parse("20:00-0300"));
-		allocation.setProfessorId(1L);
-		allocation.setCourseId(1L);
+		Department department = new Department();
+        department.setId(1L);
+        department.setName("Department 2");
 
 		// Act
-		allocation = allocationService.update(allocation);
+        department = departmentService.update(department);
 
 		// Print
-		System.out.println(allocation);
+        System.out.println(department);
 	}
 
 	@Test
@@ -85,13 +89,13 @@ public class DepartmentServiceTest {
 		Long id = 1L;
 
 		// Act
-		allocationService.deleteById(id);
+		departmentService.deleteById(id);
 	}
 
 	@Test
 	public void deleteAll() {
 		// Act
-		allocationService.deleteAll();
+		departmentService.deleteAll();
 	}
 
 }

@@ -76,4 +76,9 @@ public class ProfessorService {
 
 	}
 
+	public Professor save(Professor professor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
