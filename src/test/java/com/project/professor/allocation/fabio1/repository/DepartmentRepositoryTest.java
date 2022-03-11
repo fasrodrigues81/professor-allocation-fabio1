@@ -2,6 +2,7 @@ package com.project.professor.allocation.fabio1.repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.project.professor.allocation.fabio1.entity.Department;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -19,91 +22,90 @@ public class DepartmentRepositoryTest {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mmZ");
 
-    @Autowired
-    DepartmentRepository departmentRepository;
+	@Autowired
+	DepartmentRepository departmentRepository;
 
-    @Test
-    public void findAll() {
-        // Act
-        
+	@Test
+	public void findAll() {
+		// Act
+		List<Department> departments = departmentRepository.findAll();
 
-        // Print
-        
-    }
+		// Print
+		departments.forEach(System.out::println);
+	}
 
-    @Test
-    public void findById() {
-        // Arrange
-        
+	@Test
+	public void findById() {
+		// Arrange
+		Long id = 1L;
 
-        // Act
-        
+		// Act
+		Department department = departmentRepository.findById(id).orElse(null);
 
-        // Print
-        
-    }
+		// Print
+		System.out.println(department);
+	}
 
-    @Test
-    public void findByProfessorId() {
-        // Arrange
-        
+	@Test
+	public void findByProfessorId() {
+		// Arrange
 
-        // Act
-        
+		// Act
 
-        // Print
-        
-    }
+		// Print
 
-    @Test
-    public void findByCourseId() {
-        // Arrange
-        
+	}
 
-        // Act
-        
+	@Test
+	public void findByCourseId() {
+		// Arrange
 
-        // Print
-        
-    }
+		// Act
 
-    @Test
-    public void save_create() throws ParseException {
-        // Arrange
-        
+		// Print
 
-        // Act
-        
+	}
 
-        // Print
-        
-    }
+	@Test
+	public void save_create() throws ParseException {
+		// Arrange
+		Department department = new Department();
+		department.setId(null);
+		department.setName("Department 1");
 
-    @Test
-    public void save_update() throws ParseException {
-        // Arrange
-        
+		// Act
+		department = departmentRepository.save(department);
 
-        // Act
-        
+		// Print
+		System.out.println(department);
+	}
 
-        // Print
-        
-    }
+	@Test
+	public void save_update() throws ParseException {
+		// Arrange
+		Department department = new Department();
+		department.setId(1L);
+		department.setName("Department 2");
 
-    @Test
-    public void deleteById() {
-        // Arrange
-        
+		// Act
+		department = departmentRepository.save(department);
 
-        // Act
-        
-    }
+		// Print
+		System.out.println(department);
+	}
 
-    @Test
-    public void deleteAll() {
-        // Act
-        
-    }
+	@Test
+	public void deleteById() {
+		// Arrange
+		Long id = 1L;
+
+		// Act
+		departmentRepository.deleteById(id);
+	}
+
+	@Test
+	public void deleteAll() {
+		// Act
+		departmentRepository.deleteAllInBatch();
+	}
 }
-
