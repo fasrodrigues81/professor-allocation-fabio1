@@ -33,14 +33,14 @@ public class Professor {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "department_Id", updatable = false, insertable = false, nullable = false)
-	private Department Depart;
+	private Department depart;
 
 	public Department getDepart() {
-		return Depart;
+		return depart;
 	}
 
 	public void setDepart(Department depart) {
-		Depart = depart;
+		this.depart = depart;
 	}
 
 	public Long getId() {
@@ -78,7 +78,7 @@ public class Professor {
 	@Override
 	public String toString() {
 		return "Professor [id=" + id + ", name=" + name + ", cpf=" + cpf + ", departmentId=" + departmentId
-				+ ", Depart=" + Depart + ", getId()=" + getId() + ", getName()=" + getName() + ", getCpf()=" + getCpf()
+				+ ", Depart=" + depart + ", getId()=" + getId() + ", getName()=" + getName() + ", getCpf()=" + getCpf()
 				+ ", getDepartmentId()=" + getDepartmentId() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}

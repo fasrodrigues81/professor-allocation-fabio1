@@ -61,7 +61,7 @@ public class Allocation {
 	@JsonProperty(access = Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "course_Id", updatable = false, insertable = false, nullable = false)
-	private Course Cour;
+	private Course cour;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "professor_Id", nullable = false)
@@ -70,22 +70,22 @@ public class Allocation {
 	@JsonProperty(access = Access.READ_ONLY)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "professor_Id", updatable = false, insertable = false, nullable = false)
-	private Professor Prof;
+	private Professor prof;
 
 	public Course getCour() {
-		return Cour;
+		return cour;
 	}
 
 	public void setCour(Course cour) {
-		Cour = cour;
+		this.cour = cour;
 	}
 
 	public Professor getProf() {
-		return Prof;
+		return prof;
 	}
 
 	public void setProf(Professor prof) {
-		Prof = prof;
+		this.prof = prof;
 	}
 
 	public Long getId() {
@@ -139,7 +139,7 @@ public class Allocation {
 	@Override
 	public String toString() {
 		return "Allocation [id=" + id + ", day=" + day + ", start=" + start + ", end=" + end + ", courseId=" + courseId
-				+ ", Cour=" + Cour + ", professorId=" + professorId + ", Prof=" + Prof + ", getId()=" + getId()
+				+ ", Cour=" + cour + ", professorId=" + professorId + ", Prof=" + prof + ", getId()=" + getId()
 				+ ", getDay()=" + getDay() + ", getStart()=" + getStart() + ", getEnd()=" + getEnd()
 				+ ", getCourseId()=" + getCourseId() + ", getProfessorId()=" + getProfessorId() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
