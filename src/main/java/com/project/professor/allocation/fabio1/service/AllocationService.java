@@ -50,17 +50,14 @@ public class AllocationService {
 	// CRUD CREATE
 	public Allocation create(Allocation allocation) {
 		allocation.setId(null);
-		Allocation allocationNew = allocationRepository.save(allocation);
-		return allocationNew;
+		return saveInternal(allocation);
 	}
 
 	// CRUD UPDATE
 	public Allocation update(Allocation allocation) {
 		Long id = allocation.getId();
 		if (id != null && allocationRepository.existsById(id)) {
-
-			Allocation allocationNew = allocationRepository.save(allocation);
-			return allocationNew;
+			return saveInternal(allocation);
 		} else {
 			return null;
 		}

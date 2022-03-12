@@ -45,23 +45,29 @@ public class ProfessorService {
 	// CRUD CREATE
 	public Professor create(Professor professor) {
 		professor.setId(null);
-		Professor professorNew = professorRepository.save(professor);
-		return professorNew;
+		return saveInternal(professor);
 	}
 
 	// CRUD UPDATE
 	public Professor update(Professor professor) {
 		Long id = professor.getId();
 		if (id != null && professorRepository.existsById(id)) {
-
-			Professor professorNew = professorRepository.save(professor);
-			return professorNew;
+			return saveInternal(professor);
 		} else {
 			return null;
 		}
 
 	}
 
+	private Professor saveInternal(Professor professor) {
+		Professor professorNew = professorRepository.save(professor);
+		
+		Department department = departmentService.findById(professorNew.getDepartmentId());
+		professorNew.setDepart(department);
+		
+		return professorNew;
+	}
+	
 	// CRUD DELET by ID
 	public void deleteById(Long id) {
 		if (id != null && professorRepository.existsById(id)) {
