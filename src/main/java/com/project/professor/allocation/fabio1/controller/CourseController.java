@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
+@RequestMapping(path = "/courses")
 public class CourseController {
 
 	private final CourseService courseService;
@@ -35,7 +37,7 @@ public class CourseController {
 	@ApiOperation(value = "Find all courses")
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK") })
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path = "/courses", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	// GET http://localhost:8080/departments
 	public ResponseEntity<List<Course>> findAll(@RequestParam(name = "name", required = false) String name) {
 		List<Course> courses = courseService.findAll(name);
@@ -46,7 +48,7 @@ public class CourseController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path = "/courses/{course_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/{course_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Course> finsById(@PathVariable(name = "course_id") Long id) {
 		Course course = courseService.findById(id);
 
@@ -64,7 +66,7 @@ public class CourseController {
 	@ResponseStatus(HttpStatus.CREATED)
 	// READ, CREAT, UPDATE, DELETE
 	// GET , POST , PUT , DELETE
-	@PostMapping(path = "/courses", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Course> create(@RequestBody Course course) {
 		try {
 			Course newCourse = courseService.create(course);
@@ -79,7 +81,7 @@ public class CourseController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@ResponseStatus(HttpStatus.OK)
-	@PutMapping(path = "/courses/{course_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{course_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Course> update(@PathVariable(name = "course_id") Long id, @RequestBody Course course) {
 		course.setId(id);
 		try {

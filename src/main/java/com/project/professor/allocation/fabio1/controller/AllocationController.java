@@ -36,7 +36,7 @@ public class AllocationController {
 	@ApiOperation(value = "Find all allocations")
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK") })
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path = "/allocations", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	// public List<Allocation> findAll()
 	// http://127.0.0.1/departments ou
 	// GET http://localhost:8080/departments
@@ -49,7 +49,7 @@ public class AllocationController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path = "/allocations/{allocation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/{allocation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Allocation> findById(@PathVariable(name = "allocation_id") Long id) {
 		Allocation allocation = allocationService.findById(id);
 		if (allocation != null) {
@@ -62,7 +62,7 @@ public class AllocationController {
 	@ApiOperation(value = "Create an allocation")
 	@ApiResponses({ @ApiResponse(code = 201, message = "Created"), @ApiResponse(code = 400, message = "Bad Request") })
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(path = "/allocations", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Allocation> create(@RequestBody Allocation allocation) {
 		try {
 			Allocation newAllocation = allocationService.create(allocation);
@@ -76,7 +76,7 @@ public class AllocationController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@ResponseStatus(HttpStatus.OK)
-	@PutMapping(path = "/allocations/{allocation_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{allocation_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Allocation> update(@PathVariable(name = "allocation_id") Long id,
 			@RequestBody Allocation allocation) {
 		allocation.setId(id);
@@ -96,7 +96,7 @@ public class AllocationController {
 	@ApiOperation(value = "Delete an allocation")
 	@ApiResponses({ @ApiResponse(code = 204, message = "No Content") })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping(path = "/allocations/{allocation_id}")
+	@DeleteMapping(path = "/{allocation_id}")
 	public ResponseEntity<Void> deleteById(@PathVariable(name = "allocation_id") Long id) {
 		allocationService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -105,7 +105,7 @@ public class AllocationController {
 	@ApiOperation(value = "Delete all allocations")
 	@ApiResponses({ @ApiResponse(code = 204, message = "No Content") })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping(path = "/allocations")
+	@DeleteMapping
 	public ResponseEntity<Void> deleteAll() {
 		allocationService.deleteAll();
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
