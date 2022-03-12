@@ -1,7 +1,6 @@
 package com.project.professor.allocation.fabio1.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -34,8 +33,6 @@ public class AllocationService {
 
 	// CRUD READ by ID
 	public Allocation findById(Long id) {
-		Optional<Allocation> optional = allocationRepository.findById(id);
-		Allocation allocation = optional.orElse(null);
 		return allocationRepository.findById(id).orElse(null);
 	}
 
