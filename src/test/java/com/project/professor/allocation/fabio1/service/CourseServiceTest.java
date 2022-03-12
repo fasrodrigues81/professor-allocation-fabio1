@@ -64,7 +64,7 @@ public class CourseServiceTest {
         course.setName("Course 1");
 
 		// Act
-        course = courseService.save(course);
+        course = courseService.create(course);
 
 		// Print
 		System.out.println(course);

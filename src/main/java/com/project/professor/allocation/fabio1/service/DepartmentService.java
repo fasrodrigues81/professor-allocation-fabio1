@@ -69,10 +69,4 @@ public class DepartmentService {
 		departmentRepository.deleteAllInBatch();
 
 	}
-
-	public Department save(Department department) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

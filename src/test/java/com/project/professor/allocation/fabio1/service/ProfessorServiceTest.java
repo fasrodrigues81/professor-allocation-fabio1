@@ -78,7 +78,7 @@ public class ProfessorServiceTest {
         professor.setDepartmentId(1L);
 
 		// Act
-        professor = professorService.save(professor);
+        professor = professorService.create(professor);
 
 		// Print
 		System.out.println(professor);

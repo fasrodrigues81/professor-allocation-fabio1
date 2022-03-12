@@ -63,7 +63,7 @@ public class DepartmentServiceTest {
         department.setName("Department 1");
 
 		// Act
-        department = departmentService.save(department);
+        department = departmentService.create(department);
 
 		// Print
         System.out.println(department);
